@@ -1,0 +1,42 @@
+// {
+//     // See https://go.microsoft.com/fwlink/?LinkId=733558
+//     // for the documentation about the tasks.json format
+//     "version": "0.1.0",
+//     "command": "lessc",
+//     "isShellCommand": true,
+//     "args": ["node_modules/bootstrap/less/bootstrap.less", "styles/boostrap.css"],
+//     "showOutput": "always"
+// }
+{
+    "version": "0.1.0",
+    "command": "gulp",
+    "isShellCommand": true,
+    "tasks": [
+		{
+			"taskName": "clean",
+			"isBuildCommand": true,
+			"showOutput": "always"
+		},
+		{
+			"taskName": "compile",
+			"isBuildCommand": true,
+			"showOutput": "always"
+		},
+		{
+			"taskName": "resources",
+			"isBuildCommand": true,
+			"showOutput": "always"
+		},
+        {
+			"taskName": "libs",
+			"isBuildCommand": true,
+			"showOutput": "always"
+		},
+        {
+			"taskName": "build",
+			"isBuildCommand": true,
+			"showOutput": "always"
+		}
+
+	]
+}

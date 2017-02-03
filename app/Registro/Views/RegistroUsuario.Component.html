@@ -1,0 +1,144 @@
+<form name="registroUsuarioForm" #registroUsuarioForm="ngForm">
+    <div class="row">
+        <!--Panel Externo-->
+        <div class="col-xs-12 col-sm-12 col-md-offset-1 col-md-10 col-lg-offset-1 col-lg-10">
+            <div class="panel panel-primary-accent">
+                <div class="panel-heading">
+                        <h3 class="panel-title"></h3>
+                </div>
+                <div class="panel-body">
+                    
+                    <!--Panel interno-->
+                        <div class="row">
+                            <h5>&nbsp; &nbsp;&nbsp;&nbsp;Registro de nuevo usuario</h5><br/>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-offset-1 col-md-10 col-lg-offset-1 col-lg-10">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h3 class="panel-title"></h3>
+                                    </div>
+                                    <div class="panel-body">
+                                        <!--Nombre Completo-->
+                                        <div class="form form-horizontal">
+
+                                            <div class="row">
+                                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                    <label>* Nombre(s):</label>
+                                                    <input name="nombre" type="text" class="form-control" [(ngModel)]="contextUsuario.nombre" #nombre="ngModel" required/>
+                                                    <div [hidden]="nombre.valid || nombre.pristine || nombre.untouched" class="alert alert-danger"> El nombre es requerido.</div> 
+                                                    <br/>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                                    <label>* Apellido paterno:</label>
+                                                    <input name="apellidoPaterno" type="text" class="form-control" [(ngModel)]="contextUsuario.apellidoPaterno" #apellidoPaterno="ngModel" required/>
+                                                    <div [hidden]="apellidoPaterno.valid || apellidoPaterno.pristine || apellidoPaterno.untouched" class="alert alert-danger"> El apellido paterno es requerido.</div>
+                                                    <br />
+                                                </div>
+                                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                                    <label>* Apellido materno:</label>
+                                                    <input name="apellidoMaterno" type="text" class="form-control" [(ngModel)]="contextUsuario.apellidoMaterno" #apellidoMaterno="ngModel" required/>
+                                                    <div [hidden]="apellidoMaterno.valid || apellidoMaterno.pristine || apellidoMaterno.untouched" class="alert alert-danger"> El apellido materno es requerido.</div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                                    <label>* Correo electrónico:</label>
+                                                    <input name="correoElectronico" type="email" class="form-control" pattern=".+@.+" placeholder="1@1.com" [(ngModel)]="username" #correoElectronico="ngModel" (blur)="ValidarUsuarioExistente()" required/>
+                                                    <div [hidden]="correoElectronico.valid || correoElectronico.pristine || correoElectronico.untouched" class="alert alert-danger"> El correo electrónico es requerido y debe tener un formato de correo valido.</div>
+                                                    <div [hidden]="!ExisteUsuario" class="alert alert-danger"> Este correo electrónico ya fue registrado.</div>
+                                                    <br/>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                                    <label>* Confirmación de correo electrónico:</label>
+                                                    <input name="confirmacionCorreoElectronico" type="email" class="form-control" placeholder="1@1.com" [(ngModel)]="usernameConfirmacion" #confirmacionCorreoElectronico="ngModel" required/>
+                                                    <div [hidden]="CompareEmailFields()" class="alert alert-danger"> El correo y la confirmación no coinciden.</div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                                    <label>* Contraseña:</label>
+                                                    <input name="passwordField" type="password" class="form-control" [(ngModel)]="contrasena" #passwordField="ngModel" required/>
+                                                    <div [hidden]="passwordField.valid || passwordField.pristine || passwordField.untouched " class="alert alert-danger">La contraseña es requerida.</div>
+                                                    <br/>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                                    <label>* Confirmación de contraseña:</label>
+                                                    <input name="confirmacionPassword" type="password" class="form-control" [(ngModel)]="contrasenaConfirmacion" #confirmacionPassword="ngModel" required/>
+                                                    <div [hidden]="ComparePasswordFields()" class="alert alert-danger">La contraseña es requerida</div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                    <br/>
+                                                    <br/>
+                                                    <label>Como método alterno de autenticación a nuestro portal tambien puedes utilizar tu número de celular y un NIP de 4 dígitos. Capturalo ahora si deseas utilizar este servicio.</label>
+                                                    <br/>
+                                                    <br/>
+                                                    <br/>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                                    <label>Número celular:</label>
+                                                    <input name="celularField" [textMask]="{mask: celularMask}" type="text" class="form-control" placeholder="888-888-8888" [(ngModel)]="celular" #celularField="ngModel" value="52-" />
+                                                    <div [hidden]="celularField.valid || celularField.pristine || celularField.untouched " class="alert alert-danger">El celular no tiene un formato válido.</div>
+                                                    <br/>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                                    <label>Confirmación número de celular:</label>
+                                                    <input name="celularConfirmacionField" [textMask]="{mask: celularMask}" type="text" class="form-control" placeholder="888-888-8888" [(ngModel)]="celularConfirmacion" #celularConfirmacionField="ngModel" />
+                                                    <div [hidden]="CompareCelularFields()" class="alert alert-danger">El celular y la confirmación deben coincidir.</div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                                    <label>NIP:</label>
+                                                    <input name="nipField" type="password" minlength="4" maxlength="4" pattern="^(0|[1-9][0-9]*)$" class="form-control" [(ngModel)]="nip" #nipField="ngModel"/>
+                                                    <div [hidden]="nipField.valid || nipField.pristine || nipField.untouched " class="alert alert-danger">El nip debe ser un valor númerico de 4 dígitos.</div>
+                                                    <br/>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                                    <label>Confirmación de NIP:</label>
+                                                    <input name="nipConfirmacionField" type="password" class="form-control" minlength="4" maxlength="4" pattern="^(0|[1-9][0-9]*)$"  [(ngModel)]="nipConfirmacion" #nipConfirmacionField="ngModel"/>
+                                                    <div [hidden]="CompareNipFields()" class="alert alert-danger">El nip y la confirmación deben coincidir.</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>        
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Campos Requeridos</label>
+                        </div>
+                </div>
+            </div>
+            <br/>
+        </div>
+    </div>
+    
+    <div class="row"> 
+        <div class="col-xs-6 col-sm-6 col-md-offset-1 col-md-3 col-lg-offset-1 col-lg-3">
+            <button class="btn btn-danger pull-left btn-block" tabindex="-1">Anterior</button>
+        </div>
+        <div class="col-xs-0 col-sm-0 col-md-2 col-lg-2">
+            &nbsp;
+        </div>
+        <div class="col-xs-0 col-sm-0 col-md-2 col-lg-2">
+            &nbsp;
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+            <button type="button" class="btn btn-danger btn-block" (click)="SiguientePaso()" [disabled]="!registroUsuarioForm.valid || ExisteUsuario">Siguiente</button>
+        </div>
+        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+            
+        </div>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+</form>

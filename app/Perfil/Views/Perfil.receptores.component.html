@@ -1,0 +1,212 @@
+<form class="fill"> 
+<!--<div class="row" style="border-bottom: 1px solid #ddd; margin-left:0;">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <br/>
+        
+        <br/>
+        <br/>
+        <br/>
+    </div>
+</div>-->
+    <div class="row">
+        <br/>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title col-xs-6 col-sm-6 col-md-6 col-lg-6"><br/>Datos de facturación<br/><br/></h3>
+                    <button class="btn btn-danger pull-right" style="margin-right:15px;" (click)="SolcitiarAgregarReceptor()" >Agregar Receptores</button>
+                    <br>
+                    <br>
+                </div>
+                <div class="panel-body">
+                    
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Alias</th>
+                                    <th>Razón Social</th>
+                                    <th>Correo(s) para recepción de comprobantes</th>
+                                    <th>RFC</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let contextReceptor of listadoReceptores">
+                                    <td>{{contextReceptor.Alias}}</td>
+                                    <td>{{contextReceptor.RazonSocial}}</td>
+                                    <td>{{contextReceptor.CorreoElectronico}}</td>
+                                    <td>{{contextReceptor.RFC }}</td>
+                                    <td (click)="SolcitiarActualizarReceptor(contextReceptor.IdCliente)"><a class="glyphicon glyphicon-pencil"></a></td>                                    
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>        
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+<modal [attr.animation]="true" [attr.keyboard]="true" [attr.backdrop]="true" [size]="modalSize" (onClose)="closedModal()" (onDismiss)="dismissedModal()" (onOpen)="openedModal()" #ReceptoresModal>
+    <modal-header [show-close]="true">
+        <h4 class="modal-title text-white">Registro</h4>
+    </modal-header>
+    <modal-body>
+        <form name="DatosFacturacionForm" #DatosFacturacionForm="ngForm">
+            <div class="row">
+                <h5>&nbsp; &nbsp;&nbsp;&nbsp;Datos de facturación (Receptores)</h5><br/>
+            </div>
+            <!--Datos fiscales-->
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-offset-1 col-md-10 col-lg-offset-1 col-lg-10">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Datos fiscales</h3>
+                        </div>
+                        <div class="panel-body">
+                            <!--Nombre Completo-->
+                            <div class="form form-horizontal">
+
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <label>* RFC:</label>
+                                        <input name="rfcField" type="text" class="form-control" pattern="^([a-zñA-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])[A-Za-z|\d]{3})$" [(ngModel)]="contextDatosFiscales.RFC" #rfcField="ngModel" style="text-transform:uppercase" required />
+                                        <div [hidden]="rfcField.valid || rfcField.pristine || rfcField.untouched" class="alert alert-danger"> El RFC es requerido y debe tener un formato válido.</div>
+                                        <br/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <label>Nombre / Razón social:</label>
+                                        <input name="razonSocialfield" type="text" class="form-control" [(ngModel)]="contextDatosFiscales.razonSocial" #razonSocialfield="ngModel"/>
+                                        <!--<div [hidden]="razonSocialfield.valid || razonSocialfield.pristine || razonSocialfield.untouched" class="alert alert-danger"> La razón social es requerida.</div>-->
+                                        <br/>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <label>* Alias:</label>
+                                        <input name="aliasField" type="text" class="form-control" [(ngModel)]="contextDatosFiscales.alias" #aliasField="ngModel" required/>
+                                        <div [hidden]="aliasField.valid || aliasField.pristine || aliasField.untouched" class="alert alert-danger"> El alias es un campo requerido.</div>
+                                        <br/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>        
+                    </div>
+                </div>
+            </div>
+            <!--Domicilio fiscal-->
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-offset-1 col-md-10 col-lg-offset-1 col-lg-10">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Domicilio fiscal</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="form form-horizontal">
+                                <!--Calle-->
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <label>Calle:</label>
+                                        <input name="calleField" type="text" class="form-control" [(ngModel)]="contextDomicilioFiscal.calle"/>
+                                        <br/>
+                                    </div>
+                                </div>
+                                <!--Numeros-->
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                        <label>Número exterior:</label>
+                                        <input name="numeroExteriorField" type="text" class="form-control" [(ngModel)]="contextDomicilioFiscal.numeroExterior"/>
+                                        <br/>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                        <label>Número interior:</label>
+                                        <input name="numeroInteriorField" type="text" class="form-control" [(ngModel)]="contextDomicilioFiscal.numeroInterior"/>
+                                    </div>
+                                </div>
+                                <!--Colonia-->
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                        <label>Colonia:</label>
+                                        <input name="coloniaField" type="text" class="form-control" [(ngModel)]="contextDomicilioFiscal.colonia"/>
+                                        <br/>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                        <label>Localidad / Delegación / Municipio:</label>
+                                        <input name="localidadField" type="text" class="form-control" [(ngModel)]="contextDomicilioFiscal.localidad"/>
+                                        <br/>
+                                    </div>
+                                </div>
+                                <!--Estado-->
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                        <label>Ciudad:</label>
+                                        <input name="ciudadField" type="text" class="form-control" [(ngModel)]="contextDomicilioFiscal.ciudad"/>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                        <label>Estado:</label>
+                                        <select name="estadoField" class="form-control" [(ngModel)]="contextDomicilioFiscal.estado">
+                                            <option *ngFor="let estado of estados" [value]="estado.IdEstado">{{estado.Nombre}}</option>
+                                        </select>
+                                        <br/>
+                                    </div>
+                                </div>
+                                <!--Localidad-->
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                        <label>Pais</label>
+                                        <input name="paisField" type="text" class="form-control" [disabled]="true" value="México" [(ngModel)]="contextDomicilioFiscal.pais" />
+                                    </div>
+                                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                        <label>Código postal:</label>
+                                        <input name="codigoPostalField" type="text" class="form-control" [(ngModel)]="contextDomicilioFiscal.codigoPostal"/>
+                                    </div>
+                                </div>
+                                <!--teléfono-->
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                        <label>Teléfono</label>
+                                        <input name="telefonoField" type="text" class="form-control" [(ngModel)]="contextDomicilioFiscal.telefono"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>        
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-offset-1 col-md-10 col-lg-offset-1 col-lg-10">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Datos para recepción de comprobantes</h3>
+                        </div>
+                        <div class="panel-body">
+                            <!--Nombre Completo-->
+                            <div class="form form-horizontal">
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <label>* Email (Separar cada correo por ; ) :</label>
+                                        <input name="emailRecepcionField" type="text" class="form-control" [(ngModel)]="emailRecepcion" #emailRecepcionField="ngModel" required/>
+                                        <div [hidden]="ValidarCorreosParaEnvio()" class="alert alert-danger"> Al menos un correo es requerido y debe de tener un formato de correo valido.</div>
+                                        <br/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>        
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* Campos Requeridos</label>
+            </div>
+        </form>
+    </modal-body>
+    <modal-footer>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="modal.dismiss()">Cancelar</button>
+        <button type="button" class="btn btn-danger" (click)="GuardarCambios()" [disabled]="!DatosFacturacionForm.valid || !ValidarCorreosParaEnvio()">Guardar Cambios</button>
+    </modal-footer>
+</modal>

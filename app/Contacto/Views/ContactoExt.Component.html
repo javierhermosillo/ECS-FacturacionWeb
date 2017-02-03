@@ -1,0 +1,67 @@
+<div class="row">
+    <br/><br/>
+</div>
+<form #contactoForm="ngForm">
+    <div class="row">
+        <!--Panel Externo-->
+        <div class="col-xs-12 col-sm-12 col-md-offset-3 col-md-6 col-lg-offset-3 col-lg-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                        <h4 class="panel-title">Contacto</h4>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="form form-horizontal">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <label>Nos importa mucho su opinión, si tiene alguna duda o comentario déjenos su mensaje, con mucho gusto le responderemos.</label>
+                                <br/>
+                                <br/>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <label>*Nombre Completo:</label>
+                                <input name="nombrefield" type="text" class="form-control" [(ngModel)]="contextMensaje.Nombre" #nombrefield="ngModel" required/>
+                                <div [hidden]="nombrefield.valid || nombrefield.pristine || nombrefield.untouched" class="alert alert-danger"> El nombre es requerido.</div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <br/>
+                                <label>*Correo electrónico:</label>
+                                <input name="correoelectronicofield" type="text" class="form-control" pattern=".+@.+" placeholder="1@1.com" [(ngModel)]="contextMensaje.CorreoElectronico" #correoelectronicofield="ngModel" required/>
+                                <div [hidden]="correoelectronicofield.valid || correoelectronicofield.pristine || correoelectronicofield.untouched" class="alert alert-danger"> El correo electrónico es requerido.</div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <br/>
+                                <label>*Número de contacto:</label>
+                                <input name="numerocontactofield" type="text" class="form-control" [textMask]="{mask: celularMask}"  pattern="(\d{3}-\d{3}-\d{4})" placeholder="888-888-8888" [(ngModel)]="contextMensaje.TelefonoContacto" #numerocontactofield="ngModel" required/>
+                                <div [hidden]="numerocontactofield.valid || numerocontactofield.pristine || numerocontactofield.untouched" class="alert alert-danger"> El número de contacto es requerido.</div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <br/>
+                                <label>*Mensaje:</label>
+                                <input name="mensajefield" type="text" class="form-control" [(ngModel)]="contextMensaje.Mensaje" #mensajefield="ngModel" required/>
+                                <div [hidden]="mensajefield.valid || mensajefield.pristine || mensajefield.untouched" class="alert alert-danger"> El mensaje es requerido.</div>
+                                <br/>
+                                <br/>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <button class="btn btn-danger btn-block center-block" [disabled]="!contactoForm.valid" (click)="EnviarMensaje()">Enviar Mensaje</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+        </div>
+    </div>
+</form>
+
+<modal [attr.animation]="true" [attr.keyboard]="true" [attr.backdrop]="true" (onDismiss)="onModalDismiss()" #contactoModal>
+    <modal-header [show-close]="true">
+        <h4 class="modal-title">Contacto</h4>
+    </modal-header>
+    <modal-body>
+       Tu mensaje ya ha sido recibido por personal de nuestro de equipo. ¡Gracias por su preferencia!
+    </modal-body>
+    <modal-footer>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="dismissedModal()">Ok</button>
+    </modal-footer>
+</modal>

@@ -1,0 +1,44 @@
+<div class="WrapBody">
+    <div class="container-fluid" style="margin-left:0; margin-right:0;" >
+         <div style="height:100% !Important; min-height:100% !Important;">
+             <facturacion-menu></facturacion-menu>
+             <router-outlet></router-outlet>
+        </div>
+    </div>
+    <!--Sesion a terminado-->
+    <modal [attr.animation]="true" [attr.keyboard]="true" [attr.backdrop]="true" #sessionModal>
+        <modal-header [show-close]="true">
+            <h4 class="modal-title text-white">Sesión de usuario</h4>
+        </modal-header>
+        <modal-body>
+            Por tu seguridad tu sesión ha terminado, para continuar favor de iniciar sesión nuevamente.
+        </modal-body>
+        <modal-footer>
+            <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="cerrarSesion()">Ok</button>
+        </modal-footer>
+    </modal>
+    <!--Servicio no disponible-->
+    <modal [attr.animation]="true" [attr.keyboard]="true" [attr.backdrop]="true" #ServiceNotAvailableModal>
+        <modal-header [show-close]="true">
+            <h4 class="modal-title text-white">Servicio no disponible</h4>
+        </modal-header>
+        <modal-body>
+            Ups! Servicio no disponible, favor de intentar de nuevo si el problema persiste contacte a nuestro equipo de soporte con gusto atenderemos su petición.
+        </modal-body>
+        <modal-footer>
+            <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="servicioNoDisponible()">Ok</button>
+        </modal-footer>
+    </modal>
+    <!--General Error-->
+     <modal [attr.animation]="true" [attr.keyboard]="true" [attr.backdrop]="true" #GeneralErrorModal>
+        <modal-header [show-close]="true">
+            <h4 class="modal-title text-white">Error</h4>
+        </modal-header>
+        <modal-body>
+            ¡Ups! ha ocurrido un error, al parecer nuestro servicio tomo una siesta inesperada por favor intenta de nuevo, si el problema persiste contacta a nuestro equipo con gusto atenderemos su petición.
+        </modal-body>
+        <modal-footer>
+            <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="servicioNoDisponible()">Ok</button>
+        </modal-footer>
+    </modal>
+</div>

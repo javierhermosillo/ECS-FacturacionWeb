@@ -1,0 +1,153 @@
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body style="color: #7F8A90 !important;">
+    <div class="container-fluid">
+        <div class="row" style="background-color:#D8D8D8">
+            <div class="col-md-offset-1 col-lg-offset-1 col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                <br/>
+                <br/>
+                <div style="border-left: 8px solid #1565C0;">
+                    <h3 style="font-size:18px !Important; font-weight:bold ">&nbsp; @@EmisorRazonSocial</h3>
+                </div>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <br/>
+                <br/>
+                <address class="text-white">
+                    <strong style="font-weight: 200;">@@EmisorRazonSocial</strong><br>
+                    <label style="font-weight: 200;">@@EmisorCalle</label>&nbsp;
+                    <label style="font-weight: 200;">@@EmisorNumeroExterior</label>
+                    <label style="font-weight: 200;">@@EmisorNumeroInterior</label>,
+                    <label style="font-weight: 200;">@@EmisorColonia</label><br />
+                    <label style="font-weight: 200;">@@EmisorCiudad</label>,
+                    <label style="font-weight: 200;">@@EmisorIdEstado</label>&nbsp;
+                    <label style="font-weight: 200;">@@EmisorCodigoPostal</label>
+                    <br>
+                </address>
+            </div>
+        </div>
+        <div class="row">
+            <br />
+            <br />
+        </div>
+        <!--Encabezado para Receptor-->
+        <div class="row">
+            <div class="col-md-offset-1 col-lg-offset-1 col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                <h3 style="font-weight:bold;">Cliente:</h3>
+                <address>
+                    <strong>@@ReceptorRazonSocial</strong><br />
+                    <label style="font-weight: 200;">@@ReceptorCalle</label>&nbsp;
+                    <label style="font-weight: 200;">@@ReceptorNumeroExterior</label>
+                    <label style="font-weight: 200;">@@ReceptorNumeroInterior</label>,
+                    <label style="font-weight: 200;">@@ReceptorColonia</label><br />
+                    <label style="font-weight: 200;">@@ReceptorCiudad</label>,
+                    <label style="font-weight: 200;">@@ReceptorIdEstado</label>&nbsp;
+                    <label style="font-weight: 200;">@@ReceptorCodigoPostal</label>
+                    <br>
+                </address>
+            </div>
+            <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                <table class="table table-bordered" style="background-color:white;">
+                    <tbody>
+                        <tr>
+                            <td colspan="5" style="background-color: #1565C0;"><h3 style="color:white; font-weight:bold ">Factura</h3></td>
+                        </tr>
+                        <tr>
+                            <td class="text-center" style="font-size:16px"><label style="font-size:10px; ">Folio:</label> <br /><br />@@Serie - @@Folio</td>
+                            <td class="text-center" style="font-size:16px"><label style="font-size:10px; ">Expedición:</label> <br /><br />@@LugarExpedicion</td>
+                            <td class="text-center" style="font-size:16px"><label style="font-size:10px; ">Fecha:</label> <br /><br />@@Fecha</td>
+                            <td class="text-center" style="font-size:16px"><label style="font-size:10px; ">Método de pago:</label> <br /><br />@@MetodoPago</td>
+                            <td class="text-center" style="font-size:16px"><label style="font-size:10px; ">Total:</label> <br /><br />$@@TotalFactura</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row"><br/><br/></div>
+
+        <!--Partidas-->
+        <div class="row">
+
+            <div class="col-md-offset-1 col-lg-offset-1 col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                <!--Registros-->
+                <table class="table table-bordered " style="background-color:white;margin-bottom:0;">
+                    <thead>
+                        <tr style="background-color:#D8D8D8">
+                            <th>Descripción</th>
+                            <th><label class="pull-right">Precio Unitario</label></th>
+                            <th><label class="pull-right">Cantidad</label></th>
+                            <th><label class="pull-right">Total</label></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @@PartidasRegistros
+                    </tbody>
+                </table>
+                <!--Totales-->
+            </div>
+
+            
+            <div class="col-md-offset-1 col-lg-offset-1 col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-right:0px;">
+                <table class="table table-bordered pull-right" style="background-color:white">
+                    <tbody>
+                        <tr>
+                            <td><strong>IMPORTE EN LETRA</strong> <br/><br/><br/><br/><label style="font-weight:200;">(@@TotalEnLetra)</label></td>
+                        </tr>
+                    </tbody>
+                </table>
+                    
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"  style="padding-left:0px;">
+                <table class="table table-bordered pull-right" style="background-color:white">
+                    <tbody>
+                        <tr><td>Sub-Total:</td><td><label class="pull-right">$@@SubTotal</label></td></tr>
+                        <tr><td>IVA:</td><td><label class="pull-right">$@@IVA</label></td></tr>
+                        <tr style="background-color:#1565C0; color:white;"><td>Total:</td><td><label class="pull-right">$@@TotalFactura</label></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row"><br /><br /></div>
+
+        <!--Sellos-->
+        <div class="row">
+            <div class="col-md-offset-1 col-lg-offset-1 col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr><td colspan="6" style="background-color:#1565C0; color:white;"><h3 style="color:white; font-weight:bold ">Información timbre fiscal digital</h3></td></tr>
+                        <tr>
+                            <td class="text-center" style="font-size:16px"><label style="font-size:12px; ">Fecha de certificación:</label><br/><label style="margin-top: 40px; font-weight: normal;">@@CertificacionFecha</label></td>
+                            <td class="text-center" style="font-size:16px"><label style="font-size:12px; ">No. certificado del emisor:</label><br/><label style="margin-top: 40px; font-weight: normal;">@@NoCertificacionEmisor</label></td>
+                            <td class="text-center" style="font-size:16px"><label style="font-size:12px; ">No. serie del certificado de sello digital:</label><br/><label style="margin-top: 25px; font-weight: normal;">@@NoCertificadoSAT</label></td>
+                            <td class="text-center" style="font-size:16px"><label style="font-size:12px; ">Folio fiscal:</label><br/><label style="margin-top: 40px;font-weight: normal;">@@NoFolioFiscal</label></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">Sello del SAT:<br/><textarea style="width:100%;word-wrap:break-word; overflow:hidden; border: 0px;">@@SelloSAT</textarea> </td>
+                            <td colspan="1" rowspan="3" class="text-center" style="font-size:16px; vertical-align: middle;"><img src="@@Sello" alt="" style="width:200px; height:200px;"/>
+                        </tr>
+                        <tr><td colspan="3">Sello digital del CFDI:<br/><textarea style="width:100%; word-wrap:break-word; overflow:hidden; border: 0px;">@@SelloCFDI</textarea> </td></tr>
+                        <tr><td colspan="3">Cadena Original del complemento de certificación digital del SAT:<br/><textarea style="height:60px;width:100%; overflow:hidden; border: 0px;font-size:10px;overflow-wrap: break-all; word-wrap: break-all;-ms-word-break: break-all;word-break: break-all;word-break: break-all; -ms-hyphens: auto; -moz-hyphens: auto; -webkit-hyphens: auto;hyphens: auto;">@@CadenaOriginal</textarea> </td></tr>
+                        <tr><td>Folios:<br>@@Notas</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                @@Sello
+            </div>-->
+        </div>
+        <div class="row"> 
+            <div class="col-md-offset-1 col-lg-offset-1 col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                <span class="text-center">Este documento es una representación impresa de un CFDI.</span>
+            </div>
+        </div>
+    </div>
+</body>
+<footer></footer>
+</html>

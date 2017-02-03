@@ -1,0 +1,24 @@
+ <div class="row bs-wizard" style="border-bottom:0;">
+                
+    <div id="usuarioStep" class="col-xs-4 bs-wizard-step" [class.active]="VerificarPasoActual('RegistroUsuario')" [class.complete]="VerificarPasoActual('RegistroReceptores') || VerificarPasoActual('Confirmacion')">
+        <div class="text-center bs-wizard-stepnum text-white">Usuario</div>
+        <div class="progress"><div class="progress-bar"></div></div>
+        <span class="bs-wizard-dot"></span>
+        
+    </div>
+    
+    <div id="datosFiscalesStep" class="col-xs-4 bs-wizard-step" [class.active]="VerificarPasoActual('RegistroReceptores')" [class.complete]="VerificarPasoActual('Confirmacion')" [class.disabled]="!VerificarPasoActual('RegistroReceptores') && !VerificarPasoActual('Confirmacion')">
+        <div class="text-center bs-wizard-stepnum text-white">Datos Fiscales</div>
+        <div class="progress"><div class="progress-bar"></div></div>
+        <span class="bs-wizard-dot"></span>
+        
+    </div>
+    
+    <div id="ConfirmacionStep" class="col-xs-4 bs-wizard-step disabled" [class.active]="VerificarPasoActual('Confirmacion')" [class.disabled]="!VerificarPasoActual('Confirmacion')">
+        <div class="text-center bs-wizard-stepnum text-white">Confirmación</div>
+        <div class="progress"><div class="progress-bar"></div></div>
+        <span class="bs-wizard-dot"></span>
+    </div>
+        
+        
+</div>

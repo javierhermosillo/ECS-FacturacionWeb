@@ -1,0 +1,4 @@
+/*Custom Navbar settings*/
+ul.nav a { color: white !important; background-color: transparent !important; border-bottom-color: transparent; border-bottom-style: solid; border-bottom-width: 3px; }
+ul.nav a:hover { color: white !important; background-color: transparent !important; border-bottom-color: darkred; border-bottom-style: solid; border-bottom-width: 3px; }
+ul.nav a:active { color: white !important; background-color: transparent !important; border-bottom-color: darkred; border-bottom-style: solid; border-bottom-width: 3px; }

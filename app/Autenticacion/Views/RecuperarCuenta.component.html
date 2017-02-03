@@ -1,0 +1,54 @@
+<body style="height:100%; width: 100%; position: absolute">
+    <div class="WrapBody fullBlueContainer"> 
+        <div class="">
+            <!--<img src="" class="img-responsive" style="width:300px;">-->
+            <div class="container-fluid">
+                <div class="row">
+                    <h5 style="color:white;" class=""><img class="img-responsive"  src="Images/clientelogo.png" style="width:150px;"/></h5>
+                </div> 
+                <div>
+                    <div style="height:100% !Important; min-height:100% !Important;">  
+                        <br />
+                        <br />
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-offset-4 col-lg-offset-4 col-md-4 col-lg-4">
+                                <div class="row">
+                                    
+                                    <div class="panel panel-primary-accent">
+                                        <div class="panel-heading">
+                                                <h3 class="panel-title">Recuperar Cuenta</h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            <form name="recuperarCuentaForm" #recuperarCuentaForm="ngForm">                       
+                                                <div class="form-group">
+                                                    <!--<label for="">Email / Celular</label>-->
+                                                    <input type="text" class="form-control" name="usernameField" placeholder="Email / Celular" [(ngModel)]="username" #usernameField="ngModel" required>
+                                                    <div [hidden]="usernameField.valid|| usernameField.pristine || usernameField.untouched" class="alert alert-danger" >El correo o celular es requerido.</div>
+                                                </div>
+                                                <button type="button" class="btn btn-danger pull-right" [disabled]="!recuperarCuentaForm.valid" (click)="RecuperarCuenta()">Recuperar Cuenta</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                                
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div>
+</body>
+
+
+<modal [attr.animation]="true" [attr.keyboard]="true" [attr.backdrop]="true" #recuperarCuentaModal>
+    <modal-header [show-close]="true">
+        <h4 class="modal-title text-white">Recuperar Cuenta</h4>
+    </modal-header>
+    <modal-body>
+       {{ modalMessage }}        
+    </modal-body>
+    <modal-footer>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="dismissedModal()">Ok</button>
+    </modal-footer>
+</modal>

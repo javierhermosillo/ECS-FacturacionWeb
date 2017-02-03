@@ -1,0 +1,175 @@
+<body style="height:100%; width: 100%; position: absolute">
+    <div class="WrapBody fullBlueContainer"> 
+        <div class="">
+            <!--<img src="" class="img-responsive" style="width:300px;">-->
+            <div class="container-fluid">
+                <div class="row">
+                    <h5 style="color:white;" class=""><img class="img-responsive"  src="Images/clientelogo.png" style="width:150px;"/></h5>
+                </div> 
+                <div>
+                    <div style="height:100% !Important; min-height:100% !Important;">
+                        <form #FacturacionRapidaForm="ngForm">  
+                            <br />
+                            <br />
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-offset-4 col-lg-offset-4 col-md-4 col-lg-4">
+                                    <div class="row">
+                                        
+                                        <div class="panel panel-primary-accent">
+                                            <div class="panel-heading">
+                                                    <h3 class="panel-title">Facturación rápida</h3>
+                                            </div>
+                                            <div class="panel-body">
+                                                    <div class="row">
+                                                        <div class="text-center center-block">
+                                                            <div class="hidden-xs hidden-sm col-md-12 col-lg-12">
+                                                                <!--<h5 class="hidden-xs hidden-sm">&nbsp;</h5>-->
+                                                                <popover-content #myPopover 
+                                                                            placement="bottom"
+                                                                            [animation]="true"
+                                                                            [closeOnClickOutside]="true">
+                                                                            <!--Imagen de ticket-->
+                                                                    <img src="../Images/Ticket.jpg" alt="" class="img-responsive">
+                                                                </popover-content>
+                                                                <button [popover]="myPopover" [popoverOnHover]="true" type="button" class="btn btn-primary btn-circle"><i class="fa fa-question"></i></button>
+                                                            </div>     
+                                                            <div class="col-xs-12 col-sm-12 hidden-md hidden-lg  pull-right">
+                                                                <popover-content #myPopoversm 
+                                                                            placement="bottom"
+                                                                            [animation]="true" 
+                                                                            [closeOnClickOutside]="true">
+                                                                            <!--Imagen de ticket-->
+                                                                    <img src="../Images/Ticket.jpg" alt="" class="img-responsive">
+                                                                </popover-content>
+                                                                <br/>
+                                                                <button [popover]="myPopoversm" [popoverOnHover]="true" type="button" class="btn btn-primary btn-circle center-block"><i class="fa fa-question"></i></button>
+                                                            </div>     
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="">Estacion</label>
+                                                        <select name="estacionField" class="form-control" style="border-left:0px !important" [(ngModel)]="estacion" #estacionField="ngModel" required>
+                                                            <option *ngFor="let estacion of estaciones" [ngValue]="estacion">{{ estacion.Nombre }}</option>
+                                                        </select>
+                                                        <div [hidden]="estacionField.valid|| estacionField.pristine || estacionField.untouched" class="alert alert-danger" >La estación es requerida.</div>
+                                                    </div>                       
+                                                    <div class="form-group">
+                                                        <label for=""># Ticket</label>
+                                                        <input type="text" class="form-control" name="ticketField" [(ngModel)]="ticket" #ticketField="ngModel" required>
+                                                        <div [hidden]="ticketField.valid|| ticketField.pristine || ticketField.untouched" class="alert alert-danger" >El número de ticket es requerido.</div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for=""># Digito Verificador</label>
+                                                        <input type="text" class="form-control" name="NoVerificadorField" [(ngModel)]="noVerificador" #NoVerificadorField="ngModel" required>
+                                                        <div [hidden]="NoVerificadorField.valid|| NoVerificadorField.pristine || NoVerificadorField.untouched" class="alert alert-danger" >El número verificador es requerido.</div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="">Metodo Pago</label>
+                                                        <select name="metodoPagoField" class="form-control" [(ngModel)]="metodoPago" #metodoPagoField="ngModel" required>
+                                                            <option *ngFor="let metodoPago of metodosPago" [ngValue]="metodoPago">{{ metodoPago.Nombre }}</option>
+                                                        </select>
+                                                        <div [hidden]="metodoPagoField.valid|| metodoPagoField.pristine || metodoPagoField.untouched" class="alert alert-danger" >El metodo de pago es requerido.</div>
+                                                    </div>
+                                                    <!--No. cuenta de pago-->
+                                                    <div class="form-group" [hidden]="!EsCuentaMetodoPagoRequerido()">
+                                                        <label style="vertical-align:sub" [hidden]="!EsCuentaMetodoPagoRequerido()">No. cuenta de pago :</label>        
+                                                        <input name="MetodoPagoCuentaField" type="text" class="form-control" pattern="^([0-9][0-9]*)$" [(ngModel)]="metodoPagoCuenta" #MetodoPagoCuentaField="ngModel" [hidden]="!EsCuentaMetodoPagoRequerido()" maxlength="4"/>
+                                                        <div [hidden]="MetodoPagoCuentaField.valid || MetodoPagoCuentaField.pristine || MetodoPagoCuentaField.untouched " class="alert alert-danger">El numero de cuenta debe ser numérico.</div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="">Email</label>
+                                                        <input type="text" class="form-control" name="emailField" [(ngModel)]="emailUsuario" #emailField="ngModel" required>
+                                                        <div [hidden]="emailField.valid|| emailField.pristine || emailField.untouched" class="alert alert-danger" >El email es requerido.</div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="">RFC</label>
+                                                        <input type="text" class="form-control" name="rfcReceptorField" pattern="^([a-zñA-ZÑ\x26]{3,4}([0-9]{2})(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1])[A-Za-z|\d]{3})$" [(ngModel)]="rfcReceptor" #rfcReceptorField="ngModel" style="text-transform:uppercase" required>
+                                                        <div [hidden]="rfcReceptorField.valid|| rfcReceptorField.pristine || rfcReceptorField.untouched" class="alert alert-danger" >El RFC es requerido y debe tener un formato valido.</div>
+                                                    </div>
+                                                
+                                            </div>
+                                        </div>        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-offset-4 col-lg-offset-4 col-md-4 col-lg-4">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5" style="padding-left:0">
+                                            <button type="button" class="btn btn-danger btn-block pull-left" (click)="volverHome()">Cancelar</button>
+                                        </div>
+                                        <div class="col-xs-0 col-sm-0 col-md-2 col-lg-2">
+                                            
+                                        </div>
+                                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5" style="padding-right:0">
+                                            <button type="button" class="btn btn-danger btn-block pull-right" [disabled]="!FacturacionRapidaForm.valid" (click)="Facturar()">Facturar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form> 
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div>
+</body>
+
+
+<modal [attr.animation]="true" [attr.keyboard]="true" [attr.backdrop]="true" (onDismiss)="dismissedModal()" #facturacionRapidaModal>
+    <modal-header [show-close]="true">
+        <h4 class="modal-title text-white">Facturación Rápida</h4>
+    </modal-header>
+    <modal-body>
+        <div class="text-center">
+            <div class="row">
+                <h5>Factura :{{serieFactura}}-{{folioFactura}} </h5>
+                <br/>
+            </div>
+            <div class="row">
+                ¡Ha sido generada con éxito!
+                <br/>
+                <br/>
+            </div>
+            <div class="row">
+                Se ha enviado un correo electrónico al(los) correos proporcionados. Si ya tienes una cuenta con nosotros podras ingresar al portal y observar tu factura en el historial.
+                <br/>
+                <br/>
+            </div>
+            <div class="row">
+                <a (click)="DescargarXML()" style="cursor: pointer;">XML</a> &nbsp; &nbsp;<a (click)="DescargarPDF()" style="cursor: pointer;">PDF</a>
+            </div>
+            
+        </div>     
+    </modal-body>
+    <modal-footer>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="dismissedModal()">Ok</button>
+    </modal-footer>
+</modal>
+
+<modal [attr.animation]="true" [attr.keyboard]="true" [attr.backdrop]="true" #facturacionRapidaErrorModal>
+    <modal-header [show-close]="true">
+        <h4 class="modal-title text-white">Facturación Rápida</h4>
+    </modal-header>
+    <modal-body>
+        {{ modalMessage }}
+    </modal-body>
+    <modal-footer>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="dismissedErrorModal()">Ok</button>
+    </modal-footer>
+</modal>
+
+
+
+<!-- Modal de Aviso -->
+<modal [attr.animation]="true" [attr.keyboard]="true" [attr.backdrop]="true" #ModalMensaje>
+    <modal-header >
+        <h4 class="modal-title text-white">Aviso importante</h4>
+    </modal-header>
+    <modal-body>
+   <h6>"El módulo de facturación rápida genera un CFDI donde solo muestra el RFC como dato del receptor, por lo tanto si usted desea que el CFDI incluya los datos de domicilio fiscal lo invitamos a darse de alta en nuestra página."</h6>
+    </modal-body>
+    <modal-footer>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="MensajeModalCerrar()">Aceptar</button>
+    </modal-footer>
+</modal>

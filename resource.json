@@ -1,0 +1,8 @@
+{
+  "css": {
+    "style": [
+      "styles/bootstrap.css",
+      "styles/main.css"
+    ]
+  }
+}

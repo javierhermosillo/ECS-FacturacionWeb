@@ -1,0 +1,50 @@
+<!--Barra de busqueda-->
+<div class="row">  <!-- se agrega un row para eliminar los margenes izquierdo y derecho-->
+    <form>
+        <div class="bg-primary-accent">
+            <div class="row">
+                <br/>
+            </div>
+            <div class="row"> 
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                        <h5 class="text-white">Busqueda</h5>
+                    </div>
+                    <div class="col-xs-11 col-sm-11 col-md-11 col-lg-11">
+                        <input name="busquedaField" #busqueda placeholder="Busqueda por cualquier campo disponible en pantalla" type="text" (keydown)="filtrarResultados(busqueda.value)" class="form-control text-white" style="border-left:0px !important" [(ngModel)]="filtro"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <br/>
+            </div>
+        </div>
+    </form>
+</div>
+
+<table class="table table-stripped">
+    <thead>
+    <tr>
+        <th>Fecha</th>
+        <th>Serie</th>
+        <th>Folio</th>
+        <th class="hidden-xs hidden-sm">RFC</th>
+        <th>Cliente</th>
+        <th>Total</th>
+        <th>Descargas</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let factura of contextHistorial" >
+            <td>{{factura.Fecha}}</td>
+            <td>{{factura.Serie}}</td>
+            <td>{{factura.Folio}}</td>
+            <td class="hidden-xs hidden-sm">{{factura.RFC}}</td>
+            <td>{{factura.Cliente}}</td>
+            <td>{{factura.Total}}</td>
+            <td><a (click)="descargarXML(factura.Serie, factura.Folio, factura.RFCEmisor)">XML</a>&nbsp;<a (click)="descargarPDF(factura.Serie, factura.Folio, factura.RFCEmisor)">PDF</a></td>
+        </tr>
+    </tbody>
+</table>
+
+<!--<ng2-smart-table [settings]="tableSettings" [source]="historialSource"></ng2-smart-table>-->

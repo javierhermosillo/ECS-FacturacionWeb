@@ -1,0 +1,31 @@
+<div class="WrapBody fullBlueContainer">
+    <!--<img src="" class="img-responsive" style="width:300px;">-->
+    <div class="container">
+        <a href="/Welcome"><h5 style="color:white;" class=""><img class="img-responsive"  src="Images/clientelogo.png" style="width:150px;"/></h5></a>
+    </div>    
+    <div>  
+        <br />
+        <br />
+        <facturacion-registroprogreso [PasoActual]="_WizardStep"></facturacion-registroprogreso><br/>
+        <facturacion-registrousuario [hidden]="VerificarPasoActual('RegistroUsuario')" (notificar)="AlmacenarDatosUsuario($event)"></facturacion-registrousuario>
+        <facturacion-registroreceptores [hidden]="VerificarPasoActual('RegistroReceptores')" (notificar)="AlmacenarDatosFacturacion($event)" (volverPasoAnteriorReceptores)="VolverPasoAnterior($event)"></facturacion-registroreceptores>
+        <facturacion-registroconfirmacion [hidden]="VerificarPasoActual('Confirmacion')" (notificarRegistro)="RegistrarUsuario()" (volverPasoAnteriorConfirmacion)="VolverPasoAnterior($event)" [DatosRegistro]="_datosRegistro"></facturacion-registroconfirmacion>
+    </div>
+</div>
+
+ <modal [attr.animation]="true" [attr.keyboard]="true" [attr.backdrop]="true" (onClose)="closedModal()" (onOpen)="openedModal()" #registroModal>
+    <modal-header [show-close]="true">
+        <h4 class="modal-title text-white">Registro</h4>
+    </modal-header>
+    <modal-body>
+        ¡El registro fue realizado con éxito! <br/><br/>
+        Se ha enviado un correo de confirmación a la cuenta de correo proporcionada, una vez confirmado tu registro podrás recibir comprobantes directo en tu bandeja
+        de entrada, si no confirmas tu cuenta no te preocupes, podrás descargar tus comprobantes directo en tu historial. <br/>(No olvides revisar tu carpeta de correo
+        no deseado). <br/><br/> 
+
+        ¡Bienvenido!       
+    </modal-body>
+    <modal-footer>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="dismissedModal()">Ok</button>
+    </modal-footer>
+</modal>

@@ -1,0 +1,27 @@
+<div class="row bg-primary">
+    <nav class="navbar" role="navigation" style="margin-bottom:0 !important;">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle fa fa-bars hidden-md hidden-lg" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand text-white"><img class="img-responsive" src="Images/clientelogo.png" style="height:45px;"></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a [routerLink]="['facturacion']" class="text-white">Facturación</a></li>
+                <li><a [routerLink]="['historial']" class="text-white">Historial</a></li>
+                <li><a [routerLink]="['contacto']" class="text-white">Contacto</a></li>
+                <li><a [routerLink]="['perfil']" class="text-white">Perfil&nbsp;&nbsp;<i class="glyphicon glyphicon-triangle-bottom"></i></a></li>
+                <li><a [routerLink]="['']" (click)="clearSessionStorage()" class="text-white">Cerrar Sesión</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav>
+    
+</div>
+

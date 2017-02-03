@@ -1,0 +1,134 @@
+<div class="container">
+    <div class="row">
+        <br/>
+    </div>
+    <div class="row" *ngFor="let grupo of transaccionesAgrupadas">
+        <div class="panel panel-default" *ngIf='grupo.Transacciones.length'>
+            <div class="panel-heading">
+                {{grupo.Estacion.Nombre}}
+            </div>
+            <div class="panel-body">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Folio</th>
+                                <th class="hidden-xs hidden-sm">Fecha</th>
+                                <th>Producto</th>
+                                <th><label class="pull-right">Cantidad</label></th>
+                                <th><label class="pull-right">Precio</label></th>
+                                <th><label class="pull-right">Total</label></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let transaccion of grupo.Transacciones">
+                                <td><span class="glyphicon glyphicon-minus-sign text-danger" (click)="AbrirModalEliminar(grupo.IdGrupo, transaccion.NoTransaccionOriginal)"></span></td>
+                                <td>{{ transaccion.NoTransaccionOriginal }}</td>
+                                <td  class="hidden-xs hidden-sm">{{ transaccion.FechaCreacion | date:"dd-MM-yyyy" }}</td>
+                                <td>{{ transaccion.Productos[0].Nombre }}</td>
+                                <td><span class="pull-right">{{ transaccion.Cantidad | number:'1.2-2'}}</span></td>
+                                <td><span class="pull-right">{{ transaccion.Precio | number:'1.2-2'}}</span></td>
+                                <td><span class="pull-right">{{ transaccion.Total | number:'1.2-2'}}</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    <div class="form form-horizontal">
+                        <div class="container">
+                            <!--Totales-->
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-offset-9 col-md-3 col-lg-offset-9 col-lg-3 paddingright30">
+                                    <table class="table table-hover pull-right">
+                                        <tbody> 
+                                            <tr>
+                                                <th>Total:</th>
+                                                <th><label class="pull-right">${{grupo.TotalEnTransacciones | number:'1.2-2'}}</label></th>
+                                            </tr>
+                                        </tbody>
+                                    </table>    
+                                </div>
+                            </div>
+                            <!--Método de pago-->
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-offset-8 col-md-4 col-lg-offset-8 col-lg-4 paddingright30">
+                                    <div class="row">
+                                        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                                            <label style="vertical-align:sub">Método de pago :</label>        
+                                        </div>
+                                        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                                            <!--<select class="form-control" [(ngModel)]="selectedMetodoPago">-->
+                                            <select class="form-control" [(ngModel)]="grupo.MetodoPago">
+                                                <option *ngFor="let metodoPago of metodosPago" [ngValue]="metodoPago">{{ metodoPago.Nombre }}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--No. cuenta de pago-->
+                            <div class="row" [hidden]="!EsCuentaMetodoPagoRequerido(grupo.MetodoPago)">
+                                <div class="col-xs-12 col-sm-12 col-md-offset-8 col-md-4 col-lg-offset-8 col-lg-4 paddingright30">
+                                    <br/>
+                                    <div class="row">
+                                        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                                            <label style="vertical-align:sub" [hidden]="!EsCuentaMetodoPagoRequerido(grupo.MetodoPago)">No. cuenta de pago :</label>        
+                                        </div>
+                                        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                                            <!--<input name="MetodoPagoCuenta" type="text" class="form-control" [(ngModel)]="selectedMetodoPagoCuenta" #metodoPagoCuenta="ngModel" [hidden]="EsCuentaMetodoPagoRequerido()"/>-->
+                                            <input name="MetodoPagoCuenta" type="text" class="form-control" pattern="^([0-9][0-9]*)$" [(ngModel)]="grupo.MetodoPagoCuenta" #MetodoPagoCuenta="ngModel" [hidden]="!EsCuentaMetodoPagoRequerido(grupo.MetodoPago)" maxlength="4"/>
+                                            <div [hidden]="MetodoPagoCuenta.valid || MetodoPagoCuenta.pristine || MetodoPagoCuenta.untouched" class="alert alert-danger">El número de cuenta debe contener por lo menos los últimos 4 digitos del método de pago utilizado para realizar la transacción.</div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Emisores-->
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-offset-8 col-md-4 col-lg-offset-8 col-lg-4 paddingright30">
+                                    <br/>
+                                    <div class="row">
+                                        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                                            <label style="vertical-align:sub">Facturar a:</label>        
+                                        </div>
+                                        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                                            <!--<select class="form-control" [(ngModel)]="selectedReceptor">-->
+                                            <select class="form-control" [(ngModel)]="grupo.Receptor">
+                                                <option *ngFor="let receptor of receptores" [ngValue]="receptor">{{receptor.Alias}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Pre Factura-->
+                             <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-offset-8 col-md-4 col-lg-offset-8 col-lg-4 paddingright30" (mouseover)="mostrarMensajePopover(grupo)" [title]="MensajeBotonFacturar">
+                                    <br/>
+                                    <button name="btnPreFacturar" class="btn btn-danger btn-block" [disabled]="VerificarSeleccion(grupo)" (click)="SolicitarPreFactura(grupo.IdGrupo)">Vista previa (Pre-Factura)</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+<modal [attr.animation]="true" [attr.keyboard]="true" [attr.backdrop]="true" #ModalMensajeEliminar>
+    <modal-header [show-close]="true">
+        <h4 class="modal-title text-white">Eliminación de Folio</h4>
+    </modal-header>
+    <modal-body>
+    <h5 class="text-center">Estas seguro que deseas cancelar el Folio:  {{ transaccionNoTransaccionOriginal }}</h5>
+    </modal-body>
+    <modal-footer>
+        <div class="row"> 
+        <div class="col-md-1"></div>
+         <div class="col-md-2">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="CerrarModalEliminar()">Cancelar</button>
+        </div>
+        <div class="col-md-6"></div>
+        <div class="col-md-2">
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="EliminarYCerrarModal()">Aceptar</button>
+        </div>
+        <div class="col-md-1"></div>
+        </div>
+    </modal-footer>
+</modal>

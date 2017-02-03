@@ -1,0 +1,31 @@
+<div class="row"> 
+    <!--<facturacion-busquedacomponent (TransaccionEncontrada)="RegistrarTransaccionEncontrada($event)"></facturacion-busquedacomponent>-->
+    <facturacion-busquedacomponent (transaccionEncontrada)="facturacionGrid.AgregarTransaccionALista($event)" #facturacionBusqueda></facturacion-busquedacomponent>
+</div>
+<div class="row">
+    <div [hidden]="validarCorreoConfirmado()" class="alert alert-warning">
+                 <label class="text-normal" style="color:darkgray;">Tu correo no ha sido confirmado, para recibir tus comprobantes por este medio es necesario realizar este paso.</label> 
+                 <a (click)="reenviarCorreoConfirmacion()" style="color:#1565c0; cursor: pointer">Enviar nuevamente correo de confirmación.</a>
+             </div>
+</div>
+<div class="row"> 
+    <!--<facturacion-transaccioncomponent [transaccionParaRegistro]="transaccion"></facturacion-transaccioncomponent>-->
+    <!--<facturacion-transaccioncomponent (preFacturar)="preFacturaComponent.CargarPreFacturacion($event, facturacionGrid.selectedReceptor, facturacionGrid.selectedMetodoPago, facturacionGrid.selectedMetodoPagoCuenta)" #facturacionGrid></facturacion-transaccioncomponent>-->
+    <facturacion-transaccioncomponent (preFacturar)="preFacturaComponent.CargarPreFacturacion($event)" #facturacionGrid></facturacion-transaccioncomponent>
+</div>
+<div class="row">
+    <facturacion-prefacturacomponent (facturacionCompletada)="facturacionGrid.LimpiarPantalla($event); "  #preFacturaComponent></facturacion-prefacturacomponent>
+</div>
+
+
+<modal [attr.animation]="true" [attr.keyboard]="true" [attr.backdrop]="true" #facturacionGeneralModal>
+    <modal-header [show-close]="true">
+        <h4 class="modal-title text-white">Mensaje</h4>
+    </modal-header>
+    <modal-body>
+        Se ha enviado un nuevo correo a la cuenta proporcionada, una vez confirmada tu cuenta en el próximo inicio de sesión el mensaje de la página principal será eliminado.
+    </modal-body>
+    <modal-footer>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" (click)="dismissedGeneralModal()">Ok</button>
+    </modal-footer>
+</modal>

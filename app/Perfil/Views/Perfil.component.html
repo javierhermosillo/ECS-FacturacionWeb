@@ -1,0 +1,28 @@
+<div>
+        <div  style="height:100% !Important; min-height:100% !Important;">
+            <!--<div class="row">
+                <div class="container-fluid" class="bg-primary-accent"> 
+                    <br/>
+                    <h3 class="paddingleft20 text-white">{{_contextUsuario.Nombre + " " +  _contextUsuario.ApellidoPaterno + " " + _contextUsuario.ApellidoMaterno}}</h3>
+                    <br/>
+                </div>
+            </div>-->
+            <div class="row">
+                <!--MainContainer-->    
+                <div class=" col-xs-12 col-sm-12 col-md-offset-2 col-md-8 col-lg-offset-2 col-lg-8">
+                    <ul class="nav nav-tabs tabs" style="width:100%;">
+                        <li class="active"><a href="#tab1" data-toggle="tab"><span class="center-block text-center"><br/><br/>Perfil usuario<br/><br/></span></a></li>
+                        <li class=""><a href="#tab2" data-toggle="tab"><span class="center-block text-center"><br/><br/>Datos facturación<br/><br/></span></a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active text-style" id="tab1">
+                            <facturacion-perfilusuario (usuarioLoadedEvent)="RegistrarDatosUsuario($event)"></facturacion-perfilusuario>
+                        </div>
+                        <div class="tab-pane text-style" id="tab2">
+                            <facturacion-perfilfacturacion [inpContextUsuario]="_contextUsuario"></facturacion-perfilfacturacion>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+</div>

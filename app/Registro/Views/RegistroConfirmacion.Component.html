@@ -1,0 +1,98 @@
+<form name="frmRegistroConfirmacion">
+    <div class="row"> 
+        <div class="col-xs-12 col-sm-12 col-md-offset-1 col-md-10 col-lg-offset-1 col-lg-10">
+            <label class="text-white text-italics">Daremos del alta tu nuevo usuario con la siguiente información:</label><br/><br/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-offset-1 col-md-10 col-lg-offset-1 col-lg-10">
+                <!--Datos de usuario-->
+                <div class="panel panel-primary-accent">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <h4 class="paddingleft15">Datos de usuario</h4><br/>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                    <div class="form-group paddingleft15">
+                                        <label>Nombre completo</label>
+                                        <h5>{{ DatosRegistro.datosUsuario.nombre + " " + DatosRegistro.datosUsuario.apellidoPaterno + " " + DatosRegistro.datosUsuario.apellidoMaterno }}</h5>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                    <div class="form-group paddingleft15">
+                                        <label>Usuario</label>
+                                        <h5>{{ DatosRegistro.datosUsuario.metodosAutenticacion[0].username }}</h5>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                    <div class="form-group paddingleft15">
+                                        <label>Correo electrónico</label>
+                                        <h5>{{ DatosRegistro.datosUsuario.metodosAutenticacion[0].username }}</h5>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                    <div class="form-group paddingleft15">
+                                        <label>Celular</label>
+                                        <h5>{{ DatosRegistro.datosUsuario.metodosAutenticacion[1].username }}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <!--Datos de facturación-->
+                <div class="panel panel-primary-accent">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <h4 class="paddingleft15">Datos de facturación</h4><br/>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                    <div class="form-group paddingleft15">
+                                        <label>RFC</label>
+                                        <h5>{{ DatosRegistro.datosFacturacion.datosFiscales.RFC }}</h5>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                    <div class="form-group paddingleft15">
+                                        <label>Razón Social</label>
+                                        <h5>{{ DatosRegistro.datosFacturacion.datosFiscales.razonSocial }}</h5>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                                    <div class="form-group paddingleft15">
+                                        <label>Alias</label>
+                                        <h5>{{ DatosRegistro.datosFacturacion.datosFiscales.alias }}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+    <div class="row"> 
+        
+        <div class="col-xs-6 col-sm-6 col-md-offset-1 col-md-3 col-lg-offset-1 col-lg-3">
+            <button class="btn btn-danger pull-left btn-block" (click)="PasoAnterior()" tabindex="-1">Anterior</button>
+        </div>
+        <div class="col-xs-0 col-sm-0 col-md-2 col-lg-2">
+            &nbsp;
+        </div>
+        <div class="col-xs-0 col-sm-0 col-md-2 col-lg-2">
+            &nbsp;
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+            <button class="btn btn-danger pull-right btn-block" (click)="RegistrarUsuario()">Registrarme</button>
+        </div>
+        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+            
+        </div>
+    </div>
+</form>

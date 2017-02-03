@@ -1,0 +1,4 @@
+node_modules/
+build/
+global.config.ts
+Global.services.ts
